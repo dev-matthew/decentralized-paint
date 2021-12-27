@@ -207,7 +207,16 @@ function addPixelListeners() {
         pixel.addEventListener("dblclick", function() {
             if (document.getElementById("network-status").innerHTML === "Network: Rinkeby") {
                 if (window.ethereum) {
-                    setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value);
+                    contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value).send({from: account, gas: 3000000})
+                    .on('transactionHash', function (hash) {
+                        console.log(hash)
+                      })
+                      .on('confirmation', function (confirmationNumber, receipt) {
+                        console.log(confirmationNumber)
+                      })
+                      .on('receipt', function (receipt) {
+                        console.log(receipt)
+                      });
                 } else {
                     setStatus("Please connect your MetaMask wallet");
                 }
@@ -216,10 +225,6 @@ function addPixelListeners() {
             }
         });
     }
-}
-
-async function setPixel(i, j, color)  {
-    await contract.methods.setPixel(i, j, color).send({from: account});
 }
 
 document.getElementById("metamask-connect").addEventListener("click", function() {
