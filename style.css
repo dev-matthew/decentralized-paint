@@ -70,3 +70,8 @@ body {
     position: absolute;
     left: 28px;
 }
+
+#network-status {
+    position: absolute;
+    right: 0px;
+}
