@@ -13,9 +13,18 @@ async function getMetamask() {
 window.addEventListener("load", function() {
     loadEmptyCanvas();
     addPixelListeners();
-
+    if (typeof window.ethereum !== 'undefined') {
+        console.log("MetaMask installed");
+        getMetamask();
+    }
     populateCanvas();
 });
+
+async function getMetamask() {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    document.getElementById("account-status").innerHTML = account;
+}
 
 function setStatus(status) {
     document.getElementById("display-status").innerHTML = "Status: " + status;
