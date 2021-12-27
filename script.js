@@ -215,10 +215,11 @@ function addPixelListeners() {
                     })
                     .on('confirmation', function (confirmationNumber, receipt) {
                         setStatus("Pixel added successfully");
-                        window.getElementById("refresh-painting").click();
+                        document.getElementById("refresh-painting").click();
                     })
                     .catch((err) => {
-                        setStatus(err);
+                        console.log(err);
+                        setStatus("You may only add 1 pixel per 60 seconds");
                     });
                 } else {
                     setStatus("Please connect your MetaMask wallet");
@@ -255,22 +256,6 @@ document.getElementById("refresh-painting").addEventListener("click", function()
     window.location.reload();
 });
 
-document.getElementById("reset-painting").addEventListener("click", function() {
-    if (window.ethereum) {
-        let metamask_web3 = new Web3(window.ethereum);
-        let metamask_contract = new metamask_web3.eth.Contract(ABI, CONTRACT_ADDRESS);
-        metamask_contract.methods.resetPainting().send({from: account, gas: 3000000})
-        .on('transactionHash', function (hash) {
-            setStatus("Resetting painting...");
-        })
-        .on('confirmation', function (confirmationNumber, receipt) {
-            setStatus("Painting successfully reset");
-            window.getElementById("refresh-painting").click();
-        })
-        .catch((err) => {
-            setStatus(err);
-        });
-    } else {
-        setStatus("Please connect your MetaMask wallet");
-    }
+document.getElementById("contract-address").addEventListener("click", function() {
+    window.open("https://rinkeby.etherscan.io/address/" + CONTRACT_ADDRESS, "_blank");
 });

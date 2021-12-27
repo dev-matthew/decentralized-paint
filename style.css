@@ -135,4 +135,10 @@ body {
     bottom: 20px;
     left: 20px;
     opacity: 50%;
+    transition: all 0.2s;
+}
+
+#contract-address:hover {
+    cursor: pointer;
+    opacity: 100%;
 }
