@@ -9,9 +9,36 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div id="nav-wrapper">
+            <div id="metamask-connect" class="nav-option">
+                <img class="nav-icon" src="./assets/metamask.svg">
+                <span class="nav-title">Connect MetaMask Wallet</span>
+            </div>
+            <div id="github-connect" class="nav-option">
+                <img class="nav-icon" src="./assets/github.svg">
+                <span class="nav-title">View on GitHub</span>
+            </div>
+            <div id="get-eth" class="nav-option">
+                <img class="nav-icon" src="./assets/ethereum.svg">
+                <span class="nav-title">Get Test ETH</span>
+            </div>
+            <div id="reset-painting" class="nav-option">
+                <img class="nav-icon" src="./assets/no.svg">
+                <span class="nav-title">Reset Painting</span>
+            </div>
+            <div id="refresh-painting" class="nav-option">
+                <img class="nav-icon" src="./assets/refresh.svg">
+                <span class="nav-title">Refresh Painting</span>
+            </div>
+            <div class="nav-option" id="color-div">
+                <input type="color" id="color-input">
+                <span id="color-label">Select a Color</span>
+            </div>
+            <span id="paint-hint"><i>Double click a pixel to paint it</i></span>
+        </div>
         <div id="content-wrapper">
             <div id="top-displays">
-                <div id="display-status">Status: Loading...</div>
+                <div id="display-status">Status: </div>
                 <div id="display-cursor">0 x 0</div>
             </div>
             <div id="canvas-wrapper">
@@ -24,6 +51,7 @@
             </div>
         </div>
 
+        <span id="contract-address">Contract: </span>
         <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
         <script src="./script.js"></script>
     </body>

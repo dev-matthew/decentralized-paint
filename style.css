@@ -10,6 +10,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#nav-wrapper {
+    position: absolute;
+    width: 360px;
+    height: 480px;
+    margin-right: 480px;
+    margin-top: 175px;
+}
+
 #content-wrapper {
     margin-left: 400px;
 }
@@ -39,12 +47,12 @@ body {
 }
 
 .pixel {
-    background-color: white;
+    opacity: 100%;
     transition: all 0.1s;
 }
 
 .pixel:hover {
-    background-color: black;
+    opacity: 75%;
 }
 
 #account-wrapper {
@@ -74,4 +82,57 @@ body {
 #network-status {
     position: absolute;
     right: 0px;
+}
+
+.nav-option {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,1);
+    height: 60px;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+    opacity: 50%;
+    position: relative;
+}
+
+.nav-option:hover {
+    cursor: pointer;
+    opacity: 100%;
+}
+
+.nav-icon {
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 40px;
+}
+
+.nav-title {
+    position: absolute;
+    top: 22px;
+    margin-left: 20px;
+}
+
+#color-input {
+    margin-top: 15px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+    margin-left: 16px;
+}
+
+#color-label {
+    position: absolute;
+    top: 20px;
+    margin-left: 14px;
+}
+
+#paint-hint {
+    opacity: 50%;
+}
+
+#contract-address {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    opacity: 50%;
 }
