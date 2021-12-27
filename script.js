@@ -207,7 +207,7 @@ function addPixelListeners() {
         pixel.addEventListener("dblclick", function() {
             if (document.getElementById("network-status").innerHTML === "Network: Rinkeby") {
                 if (window.ethereum) {
-                    setPixel(i, j, document.getElementById("color-input").value);
+                    setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value);
                 } else {
                     setStatus("Please connect your MetaMask wallet");
                 }
