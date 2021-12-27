@@ -1,111 +1,111 @@
 var account;
-const CONTRACT_ADDRESS = "0x1a62098e46aDb8d5Aae3d78BC8E31ca840270999";
+const CONTRACT_ADDRESS = "0xc9F2ff2a757f7150D6a9F590504DF7e2f5681bAf";
 const ABI = [
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "getPixels",
-        "outputs": [
-            {
-                "internalType": "string[24][24]",
-                "name": "",
-                "type": "string[24][24]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "owner",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "pixels",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "resetPainting",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "_i",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_j",
-                "type": "uint256"
-            },
-            {
-                "internalType": "string",
-                "name": "_color",
-                "type": "string"
-            }
-        ],
-        "name": "setPixel",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "timestamps",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
-];
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "getPixels",
+		"outputs": [
+			{
+				"internalType": "string[24][24]",
+				"name": "",
+				"type": "string[24][24]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pixels",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "resetPainting",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_i",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_j",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_color",
+				"type": "string"
+			}
+		],
+		"name": "setPixel",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "timestamps",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
 
 const web3 = new Web3("https://rinkeby.infura.io/v3/586a399ff09641fcab0bccc875b1ce1b");
 const contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
@@ -211,12 +211,10 @@ function addPixelListeners() {
                     let metamask_contract = new metamask_web3.eth.Contract(ABI, CONTRACT_ADDRESS);
                     metamask_contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value.replace("#", "")).send({from: account, gas: 3000000})
                     .on('transactionHash', function (hash) {
-                        setStatus("Pixel addition loading...");
+                        setStatus("Setting pixel...");
                     })
                     .on('confirmation', function (confirmationNumber, receipt) {
-                        setStatus("Pixel adding successfully");
-                    })
-                    .on('receipt', function (receipt) {
+                        setStatus("Pixel added successfully");
                         window.getElementById("refresh-painting").click();
                     })
                     .catch((err) => {
@@ -266,9 +264,7 @@ document.getElementById("reset-painting").addEventListener("click", function() {
             setStatus("Resetting painting...");
         })
         .on('confirmation', function (confirmationNumber, receipt) {
-            setStatus("Paintingg successfully reset");
-        })
-        .on('receipt', function (receipt) {
+            setStatus("Painting successfully reset");
             window.getElementById("refresh-painting").click();
         })
         .catch((err) => {
