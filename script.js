@@ -207,7 +207,9 @@ function addPixelListeners() {
         pixel.addEventListener("dblclick", function() {
             if (document.getElementById("network-status").innerHTML === "Network: Rinkeby") {
                 if (window.ethereum) {
-                    contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value).send({from: account, gas: 3000000})
+                    let metamask_web3 = new Web3(window.ethereum);
+                    let metamask_contract = metamask_web3.eth.Contract(ABI, CONTRACT_ADDRESS);
+                    metamask_contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value).send({from: account, gas: 3000000})
                     .on('transactionHash', function (hash) {
                         console.log(hash)
                       })
