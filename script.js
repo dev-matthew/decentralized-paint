@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
 async function getMetamask() {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
-    document.getElementById("account-status").innerHTML = account;
+    document.getElementById("account-status").innerHTML = account.substring(0,6) + "..." + account.slice(-4);
 }
 
 function setStatus(status) {
