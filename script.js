@@ -205,7 +205,7 @@ function addPixelListeners() {
         });
 
         pixel.addEventListener("dblclick", function() {
-            if (document.getElementById("network-status") === "Network: Rinkeby") {
+            if (document.getElementById("network-status").innerHTML === "Network: Rinkeby") {
                 if (window.ethereum) {
                     setPixel(i, j, document.getElementById("color-input").value);
                 } else {
