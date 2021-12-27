@@ -209,16 +209,19 @@ function addPixelListeners() {
                 if (window.ethereum) {
                     let metamask_web3 = new Web3(window.ethereum);
                     let metamask_contract = new metamask_web3.eth.Contract(ABI, CONTRACT_ADDRESS);
-                    metamask_contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value).send({from: account, gas: 3000000})
+                    metamask_contract.methods.setPixel(coordinates[1], coordinates[2], document.getElementById("color-input").value.replace("#", "")).send({from: account, gas: 3000000})
                     .on('transactionHash', function (hash) {
-                        console.log(hash)
-                      })
-                      .on('confirmation', function (confirmationNumber, receipt) {
-                        console.log(confirmationNumber)
-                      })
-                      .on('receipt', function (receipt) {
-                        console.log(receipt)
-                      });
+                        setStatus("Pixel addition loading...");
+                    })
+                    .on('confirmation', function (confirmationNumber, receipt) {
+                        setStatus("Pixel adding successfully");
+                    })
+                    .on('receipt', function (receipt) {
+                        window.getElementById("refresh-painting").click();
+                    })
+                    .catch((err) => {
+                        setStatus(err);
+                    });
                 } else {
                     setStatus("Please connect your MetaMask wallet");
                 }
@@ -252,4 +255,26 @@ document.getElementById("color-div").addEventListener("click", function() {
 
 document.getElementById("refresh-painting").addEventListener("click", function() {
     window.location.reload();
+});
+
+document.getElementById("reset-painting").addEventListener("click", function() {
+    if (window.ethereum) {
+        let metamask_web3 = new Web3(window.ethereum);
+        let metamask_contract = new metamask_web3.eth.Contract(ABI, CONTRACT_ADDRESS);
+        metamask_contract.methods.resetPainting().send({from: account, gas: 3000000})
+        .on('transactionHash', function (hash) {
+            setStatus("Resetting painting...");
+        })
+        .on('confirmation', function (confirmationNumber, receipt) {
+            setStatus("Paintingg successfully reset");
+        })
+        .on('receipt', function (receipt) {
+            window.getElementById("refresh-painting").click();
+        })
+        .catch((err) => {
+            setStatus(err);
+        });
+    } else {
+        setStatus("Please connect your MetaMask wallet");
+    }
 });
